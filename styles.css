@@ -1,0 +1,74 @@
+#calcContainer {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    margin: 0 auto;
+    border: 1px solid navy;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+#screen {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    flex-basis: 80px;
+    margin: 8px;
+    padding: 4px 8px;
+    background-color: slategrey;
+
+}
+
+#mainLine {
+    flex-grow: 3;
+    font-size: 50px;
+}
+
+#underLine {
+    flex-grow: 1;
+}
+
+.text {
+    display: flex;
+    direction: rtl;
+    align-items: center;
+}
+
+
+#buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.gridItem {
+    display: flex;
+    flex-basis: 25%;
+    aspect-ratio: 1/1;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    box-sizing: border-box;
+    margin: 8px;
+    font-size: 25px;
+}
+
+#bottomRow .gridItem {
+    flex-basis: 84px;
+}
+
+.equal {
+    display: flex;
+    flex-basis: 168px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    box-sizing: border-box;
+    margin: 8px;
+    flex-grow: 1;
+}
+
