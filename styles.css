@@ -6,6 +6,7 @@
     border: 1px solid navy;
     border-radius: 12px;
     padding: 8px;
+    margin-top: 25px;
 }
 
 #screen {
@@ -16,22 +17,23 @@
     margin: 8px;
     padding: 4px 8px;
     background-color: slategrey;
-
+    border: 1px solid black;
+    border-radius: 8px;
 }
 
-#mainLine {
+#mainDisplay {
     flex-grow: 3;
     font-size: 50px;
 }
 
-#underLine {
+#secondDisplay {
     flex-grow: 1;
 }
 
 .text {
     display: flex;
-    direction: rtl;
     align-items: center;
+    justify-content: end;
 }
 
 
@@ -52,6 +54,7 @@
     justify-content: center;
     align-items: center;
     border: 1px solid black;
+    border-radius: 10px;
     box-sizing: border-box;
     margin: 8px;
     font-size: 25px;
@@ -70,5 +73,6 @@
     box-sizing: border-box;
     margin: 8px;
     flex-grow: 1;
+    border-radius: 10px;
 }
 
