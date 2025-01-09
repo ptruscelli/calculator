@@ -1,12 +1,16 @@
+
+
 const numberButtons = document.querySelectorAll("div.number");
 const operatorButtons = document.querySelectorAll("div.operator");
-const equalButton = document.querySelector(".equal")
+const equalButton = document.querySelector(".equal");
+const acButton = document.querySelector("#ac");
 const mainDisplay = document.querySelector("#mainDisplay");
 
 let firstOperand = null;
 let secondOperand = null; 
 let operator = null;
 let result = null;
+
 
 
 
@@ -39,16 +43,20 @@ function numberPress(event) {
 
     if (firstOperand == null) {
         firstOperand = numberKey;
+        updateDisplay(numberKey);
         // 1st click, all values should be null
     } else if (firstOperand != null && operator == null) {
         firstOperand += numberKey;
+        updateDisplay(numberKey);
         // if user hasn't clicked an operator yet
         // keep adding digits to first number
     } else if (operator != null && secondOperand == null) {
         secondOperand = numberKey;
+        updateDisplay(numberKey);
         // once operator has been selected, add digits to second operand
     } else if (secondOperand != null) {
         secondOperand += numberKey;
+        updateDisplay(numberKey);
     }
     
     console.log(`first operand is ${firstOperand} and second operand is ${secondOperand}`)
@@ -77,22 +85,30 @@ function equalsPress() {
                 break;
         }
     }
-    console.log(result);
+
+    mainDisplay.textContent = result;
 }
 
-/*
-function numberPress(event) {
-    let numberKey = event.target;
 
+
+function updateDisplay(expression) {
     if (mainDisplay.textContent == "0") {
-        mainDisplay.textContent = numberKey.textContent;
+        mainDisplay.textContent = expression;
     } else {
-        mainDisplay.textContent += numberKey.textContent;
+        mainDisplay.textContent += expression;
     };
-    firstOperand.num += numberKey.textContent;
-    console.log(`first operand = ${firstOperand.num}`);
-};
-*/
+}
+
+
+
+function allClear() {
+    firstOperand = null;
+    secondOperand = null; 
+    operator = null;
+    result = null;
+    mainDisplay.textContent = "0";
+}
+
 
 
 
@@ -106,6 +122,7 @@ for (let i = 0; i < operatorButtons.length; i++) {
     operatorButtons[i].addEventListener("click", (event) => {
         if (operator == null) {
             operator = event.target.textContent;
+            updateDisplay(operator);
         }
 
         console.log('operator is now ' + operator);
@@ -113,4 +130,4 @@ for (let i = 0; i < operatorButtons.length; i++) {
 };
 
 equalButton.addEventListener("click", equalsPress);
-
+acButton.addEventListener("click", allClear);
