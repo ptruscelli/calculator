@@ -11,6 +11,13 @@ let secondOperand = null;
 let operator = null;
 let result = null;
 
+let displayFix = false;
+/*
+displayfix value is used when the display is already showing
+an answer/value and the user clicks a new number without 
+clicking the clear button first, so the calculator knows to start
+a new operation instead of adding digits to the previous answer.
+*/
 
 
 
@@ -40,10 +47,11 @@ function divide(a, b) {
 
 function numberPress(event) {
     let numberKey = event.target.textContent;
-
+        
     if (firstOperand == null) {
         firstOperand = numberKey;
         updateDisplay(numberKey);
+        displayFix = false;
         // 1st click, all values should be null
     } else if (firstOperand != null && operator == null) {
         firstOperand += numberKey;
@@ -59,7 +67,6 @@ function numberPress(event) {
         updateDisplay(numberKey);
     }
     
-    console.log(`first operand is ${firstOperand} and second operand is ${secondOperand}`)
 };
 
 
@@ -84,15 +91,21 @@ function equalsPress() {
                 operate(a, b, divide);
                 break;
         }
+        mainDisplay.textContent = result;
+        firstOperand = null;
+        secondOperand = null; 
+        operator = null;
+        displayFix = true; // calculator is ready to start new operation
+                           // even if user has not pressed clear
     }
 
-    mainDisplay.textContent = result;
+    
 }
 
 
 
 function updateDisplay(expression) {
-    if (mainDisplay.textContent == "0") {
+    if (mainDisplay.textContent == "0" || displayFix == true) {
         mainDisplay.textContent = expression;
     } else {
         mainDisplay.textContent += expression;
@@ -120,14 +133,13 @@ for (let i = 0; i < numberButtons.length; i++) {
 
 for (let i = 0; i < operatorButtons.length; i++) {
     operatorButtons[i].addEventListener("click", (event) => {
-        if (operator == null) {
+        if (operator == null) { // only 1 operator press allowed per operation
             operator = event.target.textContent;
             updateDisplay(operator);
         }
-
-        console.log('operator is now ' + operator);
     });
 };
+
 
 equalButton.addEventListener("click", equalsPress);
 acButton.addEventListener("click", allClear);
