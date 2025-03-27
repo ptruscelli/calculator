@@ -5,6 +5,7 @@ const operatorButtons = document.querySelectorAll("div.operator");
 const equalButton = document.querySelector(".equal");
 const acButton = document.querySelector("#ac");
 const mainDisplay = document.querySelector("#mainDisplay");
+const secondDisplay = document.querySelector("#secondDisplay");
 
 let firstOperand = null;
 let secondOperand = null; 
@@ -91,7 +92,11 @@ function equalsPress() {
                 operate(a, b, divide);
                 break;
         }
-        mainDisplay.textContent = result;
+        secondDisplay.textContent = mainDisplay.textContent;
+        mainDisplay.textContent = +parseFloat(result.toFixed(7));
+        // toFixed by itself adds unnecessary trailing zeroes if number
+        // isn't a long decimal
+
         firstOperand = null;
         secondOperand = null; 
         operator = null;
@@ -120,6 +125,7 @@ function allClear() {
     operator = null;
     result = null;
     mainDisplay.textContent = "0";
+    secondDisplay.textContent = "0";
 }
 
 
@@ -133,7 +139,7 @@ for (let i = 0; i < numberButtons.length; i++) {
 
 for (let i = 0; i < operatorButtons.length; i++) {
     operatorButtons[i].addEventListener("click", (event) => {
-        if (operator == null) { // only 1 operator press allowed per operation
+        if (operator == null && firstOperand != null) {
             operator = event.target.textContent;
             updateDisplay(operator);
         }
